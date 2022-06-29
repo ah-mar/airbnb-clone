@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Infocard from "../components/Infocard";
+import MapApp from "../components/MapApp";
 
 function Search({ searchResults }) {
   const router = useRouter();
@@ -12,9 +13,8 @@ function Search({ searchResults }) {
   const formattedEndDate = format(new Date(endDate), "dd MMMM yy");
   const range = `${formattedStartDate}- ${formattedEndDate}`;
 
-  console.log("searchResults", searchResults);
   return (
-    <div>
+    <div className="relative">
       <Header placeholder={`${location} | ${range} | ${guests} guests`} />
       <main className="flex">
         <section className="flex-grow pt-14 px-6">
@@ -37,7 +37,11 @@ function Search({ searchResults }) {
             ))}
           </div>
         </section>
+        <section className=" hidden xl:block min-w-[600px]">
+          <MapApp searchResults={searchResults}/>
+        </section>
       </main>
+
       <Footer />
     </div>
   );
